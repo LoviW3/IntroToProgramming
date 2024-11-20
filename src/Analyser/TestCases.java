@@ -1,50 +1,47 @@
 package Analyser;
-import java.util.Scanner;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+public class TestCases {
+    //wanted to make a testcase for each major aspect of this program,
 
-public class TextAnalyser {
-    public static void main(String[] args) {
+    @Test
+    public void wordTest(){
         TextCounter tc = new TextCounter();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter the text you want analysed!");
-        String row;
-        row = scanner.nextLine();
+        String text = "Hey there friend! How are you doing?";
+        tc.inputText(text);
+        int actual = tc.wordCount;
+        int expected = 7;
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void charTest(){
+        TextCounter tc = new TextCounter();
+        String text = "Hey there friend! How are you doing?";
+        tc.inputText(text);
+        int actual = tc.charCount;
+        int expected = 30;
+        assertEquals(expected, actual);
+    }
 
-        while(tc.inputText(row)) {
-            row = scanner.nextLine();
-
-        } //made a menu since teh user might just want to know certain information about the text rather than everything
-        System.out.println("What do you want to know about this text?");
-        System.out.println("1: How many characters is there?");
-        System.out.println("2: How many lines of text is it?");
-        System.out.println("3: How many words is there in this text?");
-        System.out.println("4: What is the longest word in the text?");
-        System.out.println("5: Nothing else, Quit");
-        int choice;
-
-        do{
-            choice = scanner.nextInt(); //went with a switch instead of an if case because it is supposed to be more effective
-            switch (choice){
-                case 1:
-                    System.out.println("This text has "+tc.charCount+" characters in it!");
-                    break;
-
-                case 2:
-                    System.out.println("This text consists of "+tc.lineCount+" lines of text!");
-                    break;
-
-                case 3:
-                    System.out.println("There is a total of "+tc.wordCount+" words in this text!");
-                    break;
-
-                case 4:
-                    System.out.println("The longest word in this text is "+tc.longWord);
-                    break;
-            }
-
-        } while(choice != 5);
-
-
+    @Test
+    public void longestTest(){
+        TextCounter tc = new TextCounter();
+        String text = "Hey there friend! How are you doing?";
+        tc.inputText(text);
+        String actual = tc.longWord;
+        String expected = "friend!";
+        assertEquals(expected, actual);
 
     }
 
+    @Test
+    public void linesOfTextTest(){
+        TextCounter tc = new TextCounter();
+        String text = "Hey there friend! How are you doing?";
+        tc.inputText(text);
+        int actual = tc.lineCount;
+        int expected = 1;
+        assertEquals(expected, actual);
+    }
 }
+
